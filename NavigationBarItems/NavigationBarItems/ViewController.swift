@@ -12,17 +12,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bar Items"
-        view.backgroundColor = .red
+        view.backgroundColor = .lightGray
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        view.addSubview(button)
         button.center = view.center
         button.backgroundColor = .blue
-        button.setTitle("Go ti view 2", for: .normal)
+        button.setTitle("GO TO CAMERA ROLL", for: .normal)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.black.cgColor
         button.addTarget(
             self,
             action: #selector(didTapButton),
             for: .touchUpInside)
+        view.addSubview(button)
         
         configureItems()
     }
@@ -51,10 +54,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     }
     
     @objc func didTapButton(){
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        button.center = view.center
+        button.backgroundColor = .blue
+        button.setTitle("OPEN CAMERA ROLL", for: .normal)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.black.cgColor
+        button.addTarget(
+            self,
+            action: #selector(openCameraRoll),
+            for: .touchUpInside)
+        
         let vc = UIViewController()
-        vc.title = "View 2"
-        vc.view.backgroundColor = .systemPink
-        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign out", style: .done, target: self, action: nil)
+        vc.title = "CAMERA ROLL"
+        vc.view.backgroundColor = .lightGray
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Sign out",
+            style: .done,
+            target: self,
+            action: nil)
+        vc.view.addSubview(button)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
